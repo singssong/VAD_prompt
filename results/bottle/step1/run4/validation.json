@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- `anomaly_scores.csv`: scores for all 83 test images\n- `score_anomalies.py`: reproducible scoring pipeline\n\nMethod: PatchCore-style nearest-neighbor scoring plus global feature distance  \nBackbone: ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

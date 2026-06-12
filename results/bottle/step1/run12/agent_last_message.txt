@@ -1,0 +1,8 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run12/anomaly_scores.csv): scores for all 83 test images
+- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run12/score_anomalies.py): reproducible scoring pipeline
+- [metadata](/root/vad_pilot/results/bottle/step1/run12/anomaly_scores.metadata.json)
+
+Method: PatchCore-style patch nearest-neighbor anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

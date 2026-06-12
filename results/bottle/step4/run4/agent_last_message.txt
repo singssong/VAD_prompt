@@ -1,0 +1,10 @@
+Completed all required outputs in [`outputs/`](/root/vad_pilot/results/bottle/step4/run4/outputs).
+
+Validated:
+- 83/83 test images scored
+- 83 single-channel 256×256 PNG maps
+- Scores normalized to `[0,1)`
+- Training and inference scripts pass syntax checks
+
+Method: position-aware diagonal Gaussian feature modeling (PaDiM-style).  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 using concatenated `layer1` and `layer2` features.

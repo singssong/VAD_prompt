@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 83 test images successfully.\n\n- Scores: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run10/anomaly_scores.csv)\n- Code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run10/score_anomalies.py)\n- Model: `padim_model.pt`\n\nMethod: **PaDiM spatial Mahalanobis anomaly detection**  \nBackbone: **ImageNet-pretrained Wide ResNet-50-2**",
+  "status": "PASS",
+  "rerun": "skipped"
+}

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: PatchCore with a 40,000-patch memory bank\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Generated 117 image scores and 117 single-channel 256x256 pixel maps\n- Training used only `./data/train/`; scoring used only `./data/test_images/`",
+  "status": "PASS",
+  "rerun": "completed"
+}

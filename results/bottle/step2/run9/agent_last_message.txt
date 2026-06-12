@@ -1,0 +1,8 @@
+Created all required outputs in `./outputs/` and validated:
+
+- 83/83 image scores
+- 83 grayscale 256x256 pixel maps
+- Training/inference scripts, requirements, and README
+
+Method: **Positional PatchCore**  
+Backbone: **ImageNet-pretrained Wide ResNet-50-2**

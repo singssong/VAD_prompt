@@ -1,0 +1,6 @@
+Created and validated all required files in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor patch anomaly detection
+- Backbone: ImageNet-pretrained ResNet-18 (`layer2` + `layer3`)
+- Output: 117 image scores and 117 single-channel 256×256 PNG maps
+- Validation: Exact test filename coverage, finite float scores, correct PNG format and dimensions

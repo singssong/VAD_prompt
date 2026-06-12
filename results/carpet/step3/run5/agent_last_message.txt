@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature memory bank
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored: 117/117 test images
+- Pixel maps: 117 single-channel 16-bit PNGs, 256x256
+- Validation: Passed with finite float scores and exact filename coverage

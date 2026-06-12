@@ -1,0 +1,13 @@
+{
+  "method": "PatchCore-style nearest-neighbor patch memory bank",
+  "backbone": "Wide ResNet-50-2 (ImageNet-1K V2)",
+  "feature_layers": [
+    "layer2",
+    "layer3"
+  ],
+  "train_images": 209,
+  "test_images": 83,
+  "memory_patches": 30000,
+  "image_score": "mean of top 1% foreground patch distances",
+  "device": "cuda"
+}

@@ -1,0 +1,8 @@
+Scored all 83 test images successfully.
+
+- Scores: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run10/anomaly_scores.csv)
+- Code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run10/score_anomalies.py)
+- Model: `padim_model.pt`
+
+Method: **PaDiM spatial Mahalanobis anomaly detection**  
+Backbone: **ImageNet-pretrained Wide ResNet-50-2**

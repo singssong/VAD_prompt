@@ -1,0 +1,6 @@
+Completed all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor patch feature memory bank
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Results: 117 image scores and 117 single-channel 256×256 PNG maps
+- Validation: Filename coverage, JSON types, image dimensions, and scripts verified.

@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: spatial diagonal-Gaussian feature anomaly detection with Mahalanobis scoring.  
+Backbone: ImageNet-pretrained ResNet-18 using concatenated `layer2` and `layer3` features.
+
+Generated scores and 117 single-channel 256×256 PNG anomaly maps.

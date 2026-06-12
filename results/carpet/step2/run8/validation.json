@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nValidated:\n- 117 JSON scores covering every test image\n- 117 single-channel 256\u00d7256 PNG pixel maps\n- Runnable training and inference scripts\n\nMethod: PaDiM-style multiscale Gaussian feature modeling  \nBackbone: ImageNet-pretrained ResNet-18",
+  "status": "PASS",
+  "rerun": "completed"
+}

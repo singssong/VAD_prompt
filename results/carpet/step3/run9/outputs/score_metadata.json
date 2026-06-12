@@ -1,0 +1,6 @@
+{
+  "pixel_png_dtype": "uint16",
+  "pixel_png_scale": 3.1413018880814867e-06,
+  "pixel_png_decode": "raw_png_value * pixel_png_scale",
+  "image_score": "mean of highest 1% of raw 256x256 pixel scores"
+}

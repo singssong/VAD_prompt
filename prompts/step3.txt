@@ -1,0 +1,34 @@
+Develop an anomaly detection solution.
+
+## Task
+Train an anomaly detection model on ./data/train/ (normal images), then score 
+every image in ./data/test_images/ for how anomalous it is. This is a one-class 
+setting: train data is all normal, test data is a mix of normal and anomalous.
+
+## Required outputs (exact format)
+Create ./outputs/ containing:
+1. ./outputs/image_scores.json — JSON object mapping each test filename to a 
+   single float anomaly score (higher = more anomalous). Include EVERY test file.
+2. ./outputs/pixel_scores/ — one PNG per test image, same filename, 
+   single-channel, 256x256.
+3. ./outputs/train.py and ./outputs/infer.py
+4. ./outputs/requirements.txt
+5. ./outputs/README.md (how to run)
+
+## Method specification
+- Use a feature-based anomaly detection approach: extract features from test 
+  images using an ImageNet-pretrained CNN backbone, and detect anomalies by 
+  comparing test features against the distribution of normal training features. 
+  (Do not use reconstruction-based or generative approaches.)
+- Preprocessing: resize all input images to 256x256 before feature extraction.
+- Pixel anomaly map: produce a per-pixel anomaly score, then resize to 256x256.
+- Image-level score: aggregate the pixel anomaly map into a single image score.
+
+## Constraints (apply to all)
+- Use ONLY ./data/train/ for training and ./data/test_images/ for scoring.
+- Do NOT read, open, search, or reference anything under ./ground_truth/.
+  Do not look for labels or masks anywhere.
+- Do NOT ask questions mid-task. Work autonomously: write code, install packages,
+  train, run inference, fix errors, re-run until outputs exist.
+
+When finished, print what method and backbone you chose.

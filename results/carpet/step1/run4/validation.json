@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run4/anomaly_scores.csv) with all 117 image scores.\n- [score_anomalies.py](/root/vad_pilot/results/carpet/step1/run4/score_anomalies.py) for reproducible scoring.\n\nVerified complete coverage, finite values, and unique rankings.\n\n**Method:** PatchCore-style patch memory bank with cosine nearest neighbors  \n**Backbone:** ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

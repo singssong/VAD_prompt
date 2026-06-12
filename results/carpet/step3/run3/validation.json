@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Created all required files under `./outputs/`.\n\nMethod: PatchCore-style nearest-neighbor patch anomaly detection  \nBackbone: ImageNet-pretrained Wide ResNet-50-2\n\nValidated:\n- 117 image scores\n- 117 single-channel 256x256 PNG anomaly maps\n- Complete filename coverage\n- Training and inference scripts execute successfully",
+  "status": "PASS",
+  "rerun": "completed"
+}

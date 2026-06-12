@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 117/117 image scores
+- 117 single-channel 256×256 PNG heatmaps
+- Finite float scores
+- Runnable training and inference scripts
+
+Method: PatchCore-style nearest-neighbor patch memory  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

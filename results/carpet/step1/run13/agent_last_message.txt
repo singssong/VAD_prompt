@@ -1,0 +1,9 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run13/anomaly_scores.csv): scores for all 117 test images
+- [score_anomalies.py](/root/vad_pilot/results/carpet/step1/run13/score_anomalies.py): reproducible pipeline
+
+Validation passed: complete filename coverage, unique rows, finite scores.
+
+**Method:** PatchCore-style patch memory bank with exact nearest neighbors  
+**Backbone:** ImageNet-pretrained Wide ResNet-50-2

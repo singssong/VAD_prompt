@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PaDiM-style spatial diagonal Mahalanobis anomaly detection
+- Backbone: ImageNet-pretrained ResNet-18
+- Scored: 83/83 test images
+- Pixel maps: 83 single-channel 16-bit PNGs, 256×256
+- Image scores: finite floats, higher means more anomalous

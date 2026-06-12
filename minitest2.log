@@ -1,0 +1,4326 @@
+[PROGRESS] Run 1/8 | category=bottle step=1 rep=1 | elapsed=0s | done=0 skipped=0
+OpenAI Codex v0.139.0
+--------
+workdir: /root/vad_pilot/results/bottle/step1/run1
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: none
+reasoning summaries: none
+session id: 019eb76c-2c64-76b2-b085-2da51adc606e
+--------
+user
+Develop an anomaly detection solution.
+
+## Task
+Score every image in ./data/test_images/ for how anomalous it is, using 
+./data/train/ as reference data.
+
+## Constraints (apply to all)
+- Use ONLY ./data/train/ for training and ./data/test_images/ for scoring.
+- Do NOT read, open, search, or reference anything under ./ground_truth/.
+  Do not look for labels or masks anywhere.
+- Do NOT ask questions mid-task. Work autonomously: write code, install packages,
+  train, run inference, fix errors, re-run until outputs exist.
+
+When finished, print what method and backbone you chose.
+
+codex
+I’ll inspect the permitted train and test directories, then implement and run an unsupervised scorer. I will not access or search for anything under `ground_truth`.
+  → Inspect allowed data and available environment
+  • Implement anomaly scoring pipeline
+  • Run inference and validate outputs
+  • Report method and backbone
+exec
+/bin/bash -lc "find data/train -maxdepth 3 -type f -printf '%p\\n' | head -80" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+data/train/train_0000.png
+data/train/train_0001.png
+data/train/train_0002.png
+data/train/train_0003.png
+data/train/train_0004.png
+data/train/train_0005.png
+data/train/train_0006.png
+data/train/train_0007.png
+data/train/train_0008.png
+data/train/train_0009.png
+data/train/train_0010.png
+data/train/train_0011.png
+data/train/train_0012.png
+data/train/train_0013.png
+data/train/train_0014.png
+data/train/train_0015.png
+data/train/train_0016.png
+data/train/train_0017.png
+data/train/train_0018.png
+data/train/train_0019.png
+data/train/train_0020.png
+data/train/train_0021.png
+data/train/train_0022.png
+data/train/train_0023.png
+data/train/train_0024.png
+data/train/train_0025.png
+data/train/train_0026.png
+data/train/train_0027.png
+data/train/train_0028.png
+data/train/train_0029.png
+data/train/train_0030.png
+data/train/train_0031.png
+data/train/train_0032.png
+data/train/train_0033.png
+data/train/train_0034.png
+data/train/train_0035.png
+data/train/train_0036.png
+data/train/train_0037.png
+data/train/train_0038.png
+data/train/train_0039.png
+data/train/train_0040.png
+data/train/train_0041.png
+data/train/train_0042.png
+data/train/train_0043.png
+data/train/train_0044.png
+data/train/train_0045.png
+data/train/train_0046.png
+data/train/train_0047.png
+data/train/train_0048.png
+data/train/train_0049.png
+data/train/train_0050.png
+data/train/train_0051.png
+data/train/train_0052.png
+data/train/train_0053.png
+data/train/train_0054.png
+data/train/train_0055.png
+data/train/train_0056.png
+data/train/train_0057.png
+data/train/train_0058.png
+data/train/train_0059.png
+data/train/train_0060.png
+data/train/train_0061.png
+data/train/train_0062.png
+data/train/train_0063.png
+data/train/train_0064.png
+data/train/train_0065.png
+data/train/train_0066.png
+data/train/train_0067.png
+data/train/train_0068.png
+data/train/train_0069.png
+data/train/train_0070.png
+data/train/train_0071.png
+data/train/train_0072.png
+data/train/train_0073.png
+data/train/train_0074.png
+data/train/train_0075.png
+data/train/train_0076.png
+data/train/train_0077.png
+data/train/train_0078.png
+data/train/train_0079.png
+
+exec
+/bin/bash -lc "find data/test_images -maxdepth 3 -type f -printf '%p\\n' | head -80" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+data/test_images/test_0000.png
+data/test_images/test_0001.png
+data/test_images/test_0002.png
+data/test_images/test_0003.png
+data/test_images/test_0004.png
+data/test_images/test_0005.png
+data/test_images/test_0006.png
+data/test_images/test_0007.png
+data/test_images/test_0008.png
+data/test_images/test_0009.png
+data/test_images/test_0010.png
+data/test_images/test_0011.png
+data/test_images/test_0012.png
+data/test_images/test_0013.png
+data/test_images/test_0014.png
+data/test_images/test_0015.png
+data/test_images/test_0016.png
+data/test_images/test_0017.png
+data/test_images/test_0018.png
+data/test_images/test_0019.png
+data/test_images/test_0020.png
+data/test_images/test_0021.png
+data/test_images/test_0022.png
+data/test_images/test_0023.png
+data/test_images/test_0024.png
+data/test_images/test_0025.png
+data/test_images/test_0026.png
+data/test_images/test_0027.png
+data/test_images/test_0028.png
+data/test_images/test_0029.png
+data/test_images/test_0030.png
+data/test_images/test_0031.png
+data/test_images/test_0032.png
+data/test_images/test_0033.png
+data/test_images/test_0034.png
+data/test_images/test_0035.png
+data/test_images/test_0036.png
+data/test_images/test_0037.png
+data/test_images/test_0038.png
+data/test_images/test_0039.png
+data/test_images/test_0040.png
+data/test_images/test_0041.png
+data/test_images/test_0042.png
+data/test_images/test_0043.png
+data/test_images/test_0044.png
+data/test_images/test_0045.png
+data/test_images/test_0046.png
+data/test_images/test_0047.png
+data/test_images/test_0048.png
+data/test_images/test_0049.png
+data/test_images/test_0050.png
+data/test_images/test_0051.png
+data/test_images/test_0052.png
+data/test_images/test_0053.png
+data/test_images/test_0054.png
+data/test_images/test_0055.png
+data/test_images/test_0056.png
+data/test_images/test_0057.png
+data/test_images/test_0058.png
+data/test_images/test_0059.png
+data/test_images/test_0060.png
+data/test_images/test_0061.png
+data/test_images/test_0062.png
+data/test_images/test_0063.png
+data/test_images/test_0064.png
+data/test_images/test_0065.png
+data/test_images/test_0066.png
+data/test_images/test_0067.png
+data/test_images/test_0068.png
+data/test_images/test_0069.png
+data/test_images/test_0070.png
+data/test_images/test_0071.png
+data/test_images/test_0072.png
+data/test_images/test_0073.png
+data/test_images/test_0074.png
+data/test_images/test_0075.png
+data/test_images/test_0076.png
+data/test_images/test_0077.png
+data/test_images/test_0078.png
+data/test_images/test_0079.png
+
+exec
+/bin/bash -lc "printf 'train_files '; find data/train -type f | wc -l; printf 'test_files '; find data/test_images -type f | wc -l; printf 'cwd_files\\n'; find . -maxdepth 1 -type f -printf '%f\\n'" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+train_files 210
+test_files 83
+cwd_files
+
+exec
+/bin/bash -lc "python - <<'PY'
+mods=['torch','torchvision','PIL','numpy','sklearn','cv2','timm']
+for m in mods:
+    try:
+        x=__import__(m)
+        print(m, getattr(x,'__version__','ok'))
+    except Exception as e:
+        print(m, 'MISSING', type(e).__name__, str(e))
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 2386ms:
+torch 2.12.0+cu130
+torchvision 0.27.0+cu130
+PIL 12.2.0
+numpy 2.4.6
+sklearn MISSING ModuleNotFoundError No module named 'sklearn'
+cv2 MISSING ModuleNotFoundError No module named 'cv2'
+timm MISSING ModuleNotFoundError No module named 'timm'
+
+codex
+The dataset has 210 reference images and 83 images to score. I’m checking image geometry and visual consistency now; the likely implementation is PatchCore-style nearest-neighbor scoring with a pretrained convolutional backbone, which is well suited to localized bottle defects without labels.
+exec
+/bin/bash -lc "find /root/.cache/torch/hub/checkpoints -maxdepth 1 -type f -printf '%f %s bytes\\n' 2>/dev/null || true" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+wide_resnet50_2-9ba9bcbe.pth 275905729 bytes
+resnet18-f37072fd.pth 46830571 bytes
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+from collections import Counter
+for folder in ('data/train','data/test_images'):
+    files=sorted(Path(folder).glob('*'))
+    dims=Counter()
+    modes=Counter()
+    for p in files:
+        with Image.open(p) as im:
+            dims[im.size]+=1; modes[im.mode]+=1
+    print(folder, 'dimensions', dims, 'modes', modes)
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ exited 1 in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+  File "/venv/main/lib/python3.12/site-packages/PIL/Image.py", line 3635, in open
+    fp = builtins.open(filename, "rb")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IsADirectoryError: [Errno 21] Is a directory: 'data/train/.ipynb_checkpoints'
+
+exec
+/bin/bash -lc 'nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader || true' in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 15847 MiB
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image,ImageDraw
+from pathlib import Path
+for folder,name in [('data/train','train_preview.jpg'),('data/test_images','test_preview.jpg')]:
+    files=sorted(Path(folder).glob('*.png'))
+    picks=files[::max(1,len(files)//24)][:24]
+    thumbs=[]
+    for p in picks:
+        im=Image.open(p).convert('RGB'); im.thumbnail((160,160))
+        tile=Image.new('RGB',(180,190),'white'); tile.paste(im,((180-im.width)//2,5))
+        ImageDraw.Draw(tile).text((5,170),p.name,fill='black'); thumbs.append(tile)
+    sheet=Image.new('RGB',(6*180,4*190),'white')
+    for i,t in enumerate(thumbs): sheet.paste(t,((i%6)*180,(i//6)*190))
+    sheet.save(name,quality=90)
+    print(name)
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 129ms:
+test_preview.jpg
+
+exec
+/bin/bash -lc "python - <<'PY'
+from PIL import Image
+from pathlib import Path
+from collections import Counter
+for folder in ('data/train','data/test_images'):
+    files=[p for p in Path(folder).iterdir() if p.is_file()]
+    dims=Counter(); modes=Counter(); suffixes=Counter()
+    for p in files:
+        suffixes[p.suffix.lower()]+=1
+        with Image.open(p) as im:
+            dims[im.size]+=1; modes[im.mode]+=1
+    print(folder, 'dimensions', dims, 'modes', modes, 'suffixes', suffixes)
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+data/train dimensions Counter({(256, 256): 209}) modes Counter({'RGB': 209}) suffixes Counter({'.png': 209})
+data/test_images dimensions Counter({(256, 256): 83}) modes Counter({'RGB': 83}) suffixes Counter({'.png': 83})
+
+codex
+The images are tightly aligned 256×256 bottle views, and defects range from local edge damage to larger interior appearance changes. I’ll use multi-scale PatchCore features and retain spatial patch scoring; this preserves sensitivity to both small chips and broad texture/color anomalies.
+Allowed data inspection is complete. The images are aligned bottle views, so a spatial PatchCore memory bank is appropriate.
+  ✓ Inspect allowed data and available environment
+  → Implement anomaly scoring pipeline
+  • Run inference and validate outputs
+  • Report method and backbone
+codex
+I’m implementing a location-aware variant: each test patch is matched against normal patches at the same or neighboring spatial positions. That uses the dataset’s strong alignment while still tolerating small shifts, and avoids diluting the memory bank with unrelated background patches.
+apply patch
+patch: completed
+/root/vad_pilot/results/bottle/step1/run1/score_anomalies.py
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+codex
+The scorer is implemented and will write `anomaly_scores.csv` with one row per test image. I’m running the full reference extraction, leave-one-out calibration, and test scoring now, then I’ll check row coverage and score behavior.
+exec
+/bin/bash -lc 'python score_anomalies.py' in /root/vad_pilot/results/bottle/step1/run1
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+ succeeded in 8321ms:
+Reference images: 209
+Scored images: 83
+Output: anomaly_scores.csv
+Method: location-aware multi-scale PatchCore (cosine nearest neighbor)
+Backbone: ImageNet Wide ResNet-50-2
+
+codex
+The run completed successfully: all 209 training images were used as references and all 83 test images were scored. I’m validating the CSV and inspecting the highest- and lowest-scoring cases for obvious ranking failures before finalizing.
+exec
+/bin/bash -lc "python - <<'PY'
+import csv, math
+from pathlib import Path
+rows=list(csv.DictReader(Path('anomaly_scores.csv').open()))
+scores=[float(r['anomaly_score']) for r in rows]
+raw=[float(r['raw_patchcore_score']) for r in rows]
+print('rows',len(rows),'unique_names',len({r['filename'] for r in rows}))
+print('finite',all(math.isfinite(x) for x in scores+raw))
+print('standardized min/max/mean',min(scores),max(scores),sum(scores)/len(scores))
+print('raw min/max',min(raw),max(raw))
+print('top10')
+for r in sorted(rows,key=lambda r:float(r['anomaly_score']),reverse=True)[:10]: print(r)
+print('bottom10')
+for r in sorted(rows,key=lambda r:float(r['anomaly_score']))[:10]: print(r)
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+rows 83 unique_names 83
+finite True
+standardized min/max/mean -1.11345863 110.27654266 38.59225159987952
+raw min/max 0.00740102 0.16335186
+top10
+{'filename': 'test_0055.png', 'anomaly_score': '110.27654266', 'raw_patchcore_score': '0.16335186'}
+{'filename': 'test_0059.png', 'anomaly_score': '100.06156158', 'raw_patchcore_score': '0.14905044'}
+{'filename': 'test_0049.png', 'anomaly_score': '95.10861206', 'raw_patchcore_score': '0.14211610'}
+{'filename': 'test_0047.png', 'anomaly_score': '93.59062958', 'raw_patchcore_score': '0.13999085'}
+{'filename': 'test_0003.png', 'anomaly_score': '81.20745087', 'raw_patchcore_score': '0.12265387'}
+{'filename': 'test_0057.png', 'anomaly_score': '72.96605682', 'raw_patchcore_score': '0.11111557'}
+{'filename': 'test_0006.png', 'anomaly_score': '71.60186005', 'raw_patchcore_score': '0.10920563'}
+{'filename': 'test_0010.png', 'anomaly_score': '66.68582153', 'raw_patchcore_score': '0.10232297'}
+{'filename': 'test_0052.png', 'anomaly_score': '65.96466064', 'raw_patchcore_score': '0.10131331'}
+{'filename': 'test_0018.png', 'anomaly_score': '62.32687378', 'raw_patchcore_score': '0.09622025'}
+bottom10
+{'filename': 'test_0076.png', 'anomaly_score': '-1.11345863', 'raw_patchcore_score': '0.00740102'}
+{'filename': 'test_0066.png', 'anomaly_score': '-1.02233720', 'raw_patchcore_score': '0.00752859'}
+{'filename': 'test_0077.png', 'anomaly_score': '-0.99440908', 'raw_patchcore_score': '0.00756769'}
+{'filename': 'test_0067.png', 'anomaly_score': '-0.84289724', 'raw_patchcore_score': '0.00777982'}
+{'filename': 'test_0068.png', 'anomaly_score': '-0.74746889', 'raw_patchcore_score': '0.00791342'}
+{'filename': 'test_0071.png', 'anomaly_score': '-0.38213241', 'raw_patchcore_score': '0.00842491'}
+{'filename': 'test_0081.png', 'anomaly_score': '-0.16575298', 'raw_patchcore_score': '0.00872785'}
+{'filename': 'test_0074.png', 'anomaly_score': '0.16850561', 'raw_patchcore_score': '0.00919583'}
+{'filename': 'test_0065.png', 'anomaly_score': '0.40860510', 'raw_patchcore_score': '0.00953197'}
+{'filename': 'test_0080.png', 'anomaly_score': '0.57704020', 'raw_patchcore_score': '0.00976779'}
+
+exec
+/bin/bash -lc 'python -m py_compile score_anomalies.py && wc -l anomaly_scores.csv && head -5 anomaly_scores.csv' in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+84 anomaly_scores.csv
+filename,anomaly_score,raw_patchcore_score
+test_0000.png,61.25776672,0.09472345
+test_0001.png,54.56917191,0.08535913
+test_0002.png,61.60589981,0.09521085
+test_0003.png,81.20745087,0.12265387
+
+exec
+/bin/bash -lc "python - <<'PY'
+import csv
+from PIL import Image,ImageDraw
+from pathlib import Path
+rows=list(csv.DictReader(open('anomaly_scores.csv')))
+rows.sort(key=lambda r:float(r['anomaly_score']),reverse=True)
+chosen=rows[:12]+rows[-12:]
+sheet=Image.new('RGB',(6*190,4*205),'white')
+for i,r in enumerate(chosen):
+    im=Image.open(Path('data/test_images')/r['filename']).convert('RGB'); im.thumbnail((170,170))
+    tile=Image.new('RGB',(190,205),'white'); tile.paste(im,((190-im.width)//2,0))
+    label=f\"{r['filename']}  {float(r['anomaly_score']):.2f}\"
+    ImageDraw.Draw(tile).text((4,180),label,fill='black')
+    sheet.paste(tile,((i%6)*190,(i//6)*205))
+sheet.save('score_validation.jpg',quality=92)
+PY" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+codex
+Validation is clean: 83 unique finite scores, and the highest-ranked images show major foreign objects, fractures, and interior changes while the lowest-ranked images visually match the normal references. I’m removing temporary preview artifacts and doing a final exact filename-set check.
+exec
+/bin/bash -lc "rm -f train_preview.jpg test_preview.jpg score_validation.jpg
+python - <<'PY'
+import csv
+from pathlib import Path
+expected={p.name for p in Path('data/test_images').iterdir() if p.is_file()}
+with open('anomaly_scores.csv', newline='') as f:
+    actual={row['filename'] for row in csv.DictReader(f)}
+print('missing', sorted(expected-actual))
+print('extra', sorted(actual-expected))
+print('scored', len(actual))
+PY
+ls -lh score_anomalies.py anomaly_scores.csv" in /root/vad_pilot/results/bottle/step1/run1
+ succeeded in 0ms:
+missing []
+extra []
+scored 83
+-rw-rw-r-- 1 root root 3.2K Jun 11 16:05 anomaly_scores.csv
+-rw-rw-r-- 1 root root 8.1K Jun 11 16:05 score_anomalies.py
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+  ✓ Inspect allowed data and available environment
+  ✓ Implement anomaly scoring pipeline
+  ✓ Run inference and validate outputs
+  ✓ Report method and backbone
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+codex
+Scored all 83 test images. Results: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run1/anomaly_scores.csv)
+
+Implementation: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run1/score_anomalies.py)
+
+- **Method:** Location-aware multi-scale PatchCore with cosine nearest-neighbor scoring
+- **Backbone:** ImageNet-pretrained Wide ResNet-50-2
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..05579bcb5a1fd3b24f5fa354224e9ba26ea54938
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,232 @@
++#!/usr/bin/env python3
++"""Score test images with a location-aware PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, root: Path, transform) -> None:
++        self.paths = sorted(
++            path for path in root.iterdir()
++            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
++        )
++        if not self.paths:
++            raise RuntimeError(f"No images found in {root}")
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class WideResNetFeatures(nn.Module):
++    """ImageNet features from the first three residual stages."""
++
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        x = self.stem(images)
++        layer1 = self.layer1(x)
++        layer2 = self.layer2(layer1)
++        layer3 = self.layer3(layer2)
++
++        target_size = layer3.shape[-2:]
++        layer1 = F.adaptive_avg_pool2d(layer1, target_size)
++        layer2 = F.adaptive_avg_pool2d(layer2, target_size)
++        return torch.cat((layer1, layer2, layer3), dim=1)
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device="cpu").manual_seed(17)
++    projection = torch.randn(input_dim, output_dim, generator=generator)
++    projection /= math.sqrt(output_dim)
++    return projection.to(device)
++
++
++@torch.inference_mode()
++def extract_features(
++    model: nn.Module,
++    loader: DataLoader,
++    device: torch.device,
++    projection: Tensor | None = None,
++) -> tuple[Tensor, list[str], Tensor]:
++    feature_batches: list[Tensor] = []
++    names: list[str] = []
++
++    for images, batch_names in loader:
++        features = model(images.to(device, non_blocking=True))
++        features = F.avg_pool2d(features, kernel_size=3, stride=1, padding=1)
++        features = features.permute(0, 2, 3, 1).contiguous()
++
++        if projection is None:
++            projection = make_projection(features.shape[-1], 384, device)
++        features = features @ projection
++        features = F.normalize(features, dim=-1)
++        feature_batches.append(features.cpu())
++        names.extend(batch_names)
++
++    assert projection is not None
++    return torch.cat(feature_batches), names, projection
++
++
++def shifted_bank(bank: Tensor, dy: int, dx: int) -> Tensor:
++    """Shift a feature bank without wrapping values across image boundaries."""
++    _, height, width, _ = bank.shape
++    y_source = torch.arange(height, device=bank.device).sub(dy).clamp(0, height - 1)
++    x_source = torch.arange(width, device=bank.device).sub(dx).clamp(0, width - 1)
++    return bank.index_select(1, y_source).index_select(2, x_source)
++
++
++@torch.inference_mode()
++def patch_anomaly_maps(
++    query: Tensor,
++    bank: Tensor,
++    query_indices: Tensor | None = None,
++) -> Tensor:
++    """Return one nearest-normal cosine distance per spatial patch."""
++    best_similarity = torch.full(
++        query.shape[:-1], -1.0, dtype=query.dtype, device=query.device
++    )
++
++    # A cross-shaped neighborhood permits modest registration error while
++    # keeping each patch tied to the corresponding part of the bottle.
++    for dy, dx in ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1)):
++        candidates = shifted_bank(bank, dy, dx)
++        similarities = torch.einsum("bhwd,nhwd->bnhw", query, candidates)
++        if query_indices is not None and dy == 0 and dx == 0:
++            batch_ids = torch.arange(query.shape[0], device=query.device)
++            similarities[batch_ids, query_indices] = -1.0
++        best_similarity = torch.maximum(best_similarity, similarities.amax(dim=1))
++
++    return 1.0 - best_similarity
++
++
++def image_scores(patch_maps: Tensor) -> Tensor:
++    flat = patch_maps.flatten(1)
++    top_k = max(1, math.ceil(flat.shape[1] * 0.02))
++    return flat.topk(top_k, dim=1).values.mean(dim=1)
++
++
++@torch.inference_mode()
++def score_feature_set(
++    features: Tensor,
++    bank: Tensor,
++    device: torch.device,
++    batch_size: int,
++    leave_one_out: bool = False,
++) -> Tensor:
++    outputs: list[Tensor] = []
++    for start in range(0, len(features), batch_size):
++        end = min(start + batch_size, len(features))
++        query = features[start:end].to(device)
++        indices = (
++            torch.arange(start, end, device=device) if leave_one_out else None
++        )
++        outputs.append(image_scores(patch_anomaly_maps(query, bank, indices)).cpu())
++    return torch.cat(outputs)
++
++
++def robust_standardize(test_scores: Tensor, reference_scores: Tensor) -> Tensor:
++    median = reference_scores.median()
++    mad = (reference_scores - median).abs().median().clamp_min(1e-6)
++    # The factor makes MAD comparable to standard deviation for normal data.
++    return (test_scores - median) / (1.4826 * mad)
++
++
++def write_scores(
++    output_path: Path,
++    names: list[str],
++    raw_scores: Tensor,
++    standardized_scores: Tensor,
++) -> None:
++    with output_path.open("w", newline="") as handle:
++        writer = csv.writer(handle)
++        writer.writerow(("filename", "anomaly_score", "raw_patchcore_score"))
++        for name, score, raw_score in zip(names, standardized_scores, raw_scores):
++            writer.writerow((name, f"{score.item():.8f}", f"{raw_score.item():.8f}"))
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=16)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    torch.manual_seed(17)
++    if torch.cuda.is_available():
++        device = torch.device("cuda")
++        torch.backends.cudnn.benchmark = True
++    else:
++        device = torch.device("cpu")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    transform = weights.transforms(crop_size=256, resize_size=256)
++    train_dataset = ImageDataset(args.train_dir, transform)
++    test_dataset = ImageDataset(args.test_dir, transform)
++    loader_args = {
++        "batch_size": args.batch_size,
++        "num_workers": 4,
++        "pin_memory": device.type == "cuda",
++    }
++    train_loader = DataLoader(train_dataset, shuffle=False, **loader_args)
++    test_loader = DataLoader(test_dataset, shuffle=False, **loader_args)
++
++    model = WideResNetFeatures().eval().to(device)
++    train_features, train_names, projection = extract_features(
++        model, train_loader, device
++    )
++    test_features, test_names, _ = extract_features(
++        model, test_loader, device, projection
++    )
++    del model
++
++    bank = train_features.to(device)
++    train_scores = score_feature_set(
++        train_features, bank, device, args.batch_size, leave_one_out=True
++    )
++    test_scores = score_feature_set(
++        test_features, bank, device, args.batch_size, leave_one_out=False
++    )
++    standardized_scores = robust_standardize(test_scores, train_scores)
++    write_scores(args.output, test_names, test_scores, standardized_scores)
++
++    print(f"Reference images: {len(train_names)}")
++    print(f"Scored images: {len(test_names)}")
++    print(f"Output: {args.output}")
++    print("Method: location-aware multi-scale PatchCore (cosine nearest neighbor)")
++    print("Backbone: ImageNet Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+tokens used
+32,314
+Scored all 83 test images. Results: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run1/anomaly_scores.csv)
+
+Implementation: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run1/score_anomalies.py)
+
+- **Method:** Location-aware multi-scale PatchCore with cosine nearest-neighbor scoring
+- **Backbone:** ImageNet-pretrained Wide ResNet-50-2
+[PROGRESS] Run 2/8 | category=bottle step=1 rep=2 | elapsed=175s | done=1 skipped=0
+OpenAI Codex v0.139.0
+--------
+workdir: /root/vad_pilot/results/bottle/step1/run2
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: none
+reasoning summaries: none
+session id: 019eb76e-d80e-79c0-bea7-49746971a44d
+--------
+user
+Develop an anomaly detection solution.
+
+## Task
+Score every image in ./data/test_images/ for how anomalous it is, using 
+./data/train/ as reference data.
+
+## Constraints (apply to all)
+- Use ONLY ./data/train/ for training and ./data/test_images/ for scoring.
+- Do NOT read, open, search, or reference anything under ./ground_truth/.
+  Do not look for labels or masks anywhere.
+- Do NOT ask questions mid-task. Work autonomously: write code, install packages,
+  train, run inference, fix errors, re-run until outputs exist.
+
+When finished, print what method and backbone you chose.
+
+codex
+I’ll inspect only the permitted train and test directories, determine the image structure, then implement and run an unsupervised scorer. I will not access `ground_truth` or any labels.
+exec
+/bin/bash -lc "pwd && printf '%s\\n' '--- files ---' && find ./data/train ./data/test_images -maxdepth 3 -type f | sort | sed -n '1,120p' && printf '%s\\n' '--- counts ---' && find ./data/train -type f | wc -l && find ./data/test_images -type f | wc -l && printf '%s\\n' '--- top-level ---' && find ./data/train ./data/test_images -maxdepth 2 -type d | sort" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+/root/vad_pilot/results/bottle/step1/run2
+--- files ---
+./data/test_images/test_0000.png
+./data/test_images/test_0001.png
+./data/test_images/test_0002.png
+./data/test_images/test_0003.png
+./data/test_images/test_0004.png
+./data/test_images/test_0005.png
+./data/test_images/test_0006.png
+./data/test_images/test_0007.png
+./data/test_images/test_0008.png
+./data/test_images/test_0009.png
+./data/test_images/test_0010.png
+./data/test_images/test_0011.png
+./data/test_images/test_0012.png
+./data/test_images/test_0013.png
+./data/test_images/test_0014.png
+./data/test_images/test_0015.png
+./data/test_images/test_0016.png
+./data/test_images/test_0017.png
+./data/test_images/test_0018.png
+./data/test_images/test_0019.png
+./data/test_images/test_0020.png
+./data/test_images/test_0021.png
+./data/test_images/test_0022.png
+./data/test_images/test_0023.png
+./data/test_images/test_0024.png
+./data/test_images/test_0025.png
+./data/test_images/test_0026.png
+./data/test_images/test_0027.png
+./data/test_images/test_0028.png
+./data/test_images/test_0029.png
+./data/test_images/test_0030.png
+./data/test_images/test_0031.png
+./data/test_images/test_0032.png
+./data/test_images/test_0033.png
+./data/test_images/test_0034.png
+./data/test_images/test_0035.png
+./data/test_images/test_0036.png
+./data/test_images/test_0037.png
+./data/test_images/test_0038.png
+./data/test_images/test_0039.png
+./data/test_images/test_0040.png
+./data/test_images/test_0041.png
+./data/test_images/test_0042.png
+./data/test_images/test_0043.png
+./data/test_images/test_0044.png
+./data/test_images/test_0045.png
+./data/test_images/test_0046.png
+./data/test_images/test_0047.png
+./data/test_images/test_0048.png
+./data/test_images/test_0049.png
+./data/test_images/test_0050.png
+./data/test_images/test_0051.png
+./data/test_images/test_0052.png
+./data/test_images/test_0053.png
+./data/test_images/test_0054.png
+./data/test_images/test_0055.png
+./data/test_images/test_0056.png
+./data/test_images/test_0057.png
+./data/test_images/test_0058.png
+./data/test_images/test_0059.png
+./data/test_images/test_0060.png
+./data/test_images/test_0061.png
+./data/test_images/test_0062.png
+./data/test_images/test_0063.png
+./data/test_images/test_0064.png
+./data/test_images/test_0065.png
+./data/test_images/test_0066.png
+./data/test_images/test_0067.png
+./data/test_images/test_0068.png
+./data/test_images/test_0069.png
+./data/test_images/test_0070.png
+./data/test_images/test_0071.png
+./data/test_images/test_0072.png
+./data/test_images/test_0073.png
+./data/test_images/test_0074.png
+./data/test_images/test_0075.png
+./data/test_images/test_0076.png
+./data/test_images/test_0077.png
+./data/test_images/test_0078.png
+./data/test_images/test_0079.png
+./data/test_images/test_0080.png
+./data/test_images/test_0081.png
+./data/test_images/test_0082.png
+./data/train/.ipynb_checkpoints/train_0000-checkpoint.png
+./data/train/train_0000.png
+./data/train/train_0001.png
+./data/train/train_0002.png
+./data/train/train_0003.png
+./data/train/train_0004.png
+./data/train/train_0005.png
+./data/train/train_0006.png
+./data/train/train_0007.png
+./data/train/train_0008.png
+./data/train/train_0009.png
+./data/train/train_0010.png
+./data/train/train_0011.png
+./data/train/train_0012.png
+./data/train/train_0013.png
+./data/train/train_0014.png
+./data/train/train_0015.png
+./data/train/train_0016.png
+./data/train/train_0017.png
+./data/train/train_0018.png
+./data/train/train_0019.png
+./data/train/train_0020.png
+./data/train/train_0021.png
+./data/train/train_0022.png
+./data/train/train_0023.png
+./data/train/train_0024.png
+./data/train/train_0025.png
+./data/train/train_0026.png
+./data/train/train_0027.png
+./data/train/train_0028.png
+./data/train/train_0029.png
+./data/train/train_0030.png
+./data/train/train_0031.png
+./data/train/train_0032.png
+./data/train/train_0033.png
+./data/train/train_0034.png
+./data/train/train_0035.png
+--- counts ---
+210
+83
+--- top-level ---
+./data/test_images
+./data/train
+./data/train/.ipynb_checkpoints
+
+codex
+The dataset has 209 apparent training images plus one notebook checkpoint duplicate, and 83 test images. I’m checking dimensions and the available ML stack now; I’ll exclude hidden/checkpoint files so the reference set is not accidentally duplicated.
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from PIL import Image
+for root in [Path('data/train'), Path('data/test_images')]:
+    files=sorted(p for p in root.glob('*') if p.is_file() and not p.name.startswith('.'))
+    shapes={}
+    modes={}
+    for p in files:
+        with Image.open(p) as im:
+            shapes[im.size]=shapes.get(im.size,0)+1
+            modes[im.mode]=modes.get(im.mode,0)+1
+    print(root, len(files), shapes, modes)
+PY" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+data/train 209 {(256, 256): 209} {'RGB': 209}
+data/test_images 83 {(256, 256): 83} {'RGB': 83}
+
+exec
+/bin/bash -lc 'nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || true' in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+NVIDIA GeForce RTX 5060 Ti, 16311 MiB
+
+exec
+/bin/bash -lc "python - <<'PY'
+mods=['torch','torchvision','timm','numpy','PIL','sklearn','cv2']
+for m in mods:
+ try:
+  x=__import__(m); print(m, getattr(x,'__version__','ok'))
+ except Exception as e: print(m, 'ERROR', repr(e))
+PY" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 2349ms:
+torch 2.12.0+cu130
+torchvision 0.27.0+cu130
+timm ERROR ModuleNotFoundError("No module named 'timm'")
+numpy 2.4.6
+PIL 12.2.0
+sklearn ERROR ModuleNotFoundError("No module named 'sklearn'")
+cv2 ERROR ModuleNotFoundError("No module named 'cv2'")
+
+exec
+/bin/bash -lc "find ~/.cache/torch/hub/checkpoints -maxdepth 1 -type f -printf '%f\\n' 2>/dev/null | sort | head -50" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+resnet18-f37072fd.pth
+wide_resnet50_2-9ba9bcbe.pth
+
+codex
+The images are aligned bottle-mouth views with localized surface defects, so I’m using a PatchCore-style method rather than a global embedding detector. The implementation will extract multi-scale local features from ImageNet-pretrained Wide ResNet-50-2, build a compact memory bank from training patches, and score each test image from its strongest nearest-neighbor patch deviations.
+exec
+/bin/bash -lc "find . -maxdepth 1 -type f -printf '%f\\n' | sort && find . -maxdepth 1 -type d -printf '%f\\n' | sort" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+.
+
+codex
+I’m adding a self-contained scoring script and a CSV output. The scorer keeps spatial patch features, pools them locally for robustness, uses deterministic projection and memory-bank sampling, and computes a top-tail anomaly score so a small defect is not diluted by the mostly normal image.
+apply patch
+patch: completed
+/root/vad_pilot/results/bottle/step1/run2/score_anomalies.py
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+exec
+/bin/bash -lc 'python score_anomalies.py' in /root/vad_pilot/results/bottle/step1/run2
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+ succeeded in 5074ms:
+Scored 83 images -> anomaly_scores.csv
+Method: PatchCore-style nearest-neighbor patch memory bank
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+codex
+The scorer is running on the GPU now. After it completes, I’ll verify that all 83 test filenames appear exactly once and that every score is finite, then inspect the score distribution for obvious pipeline failures.
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+exec
+/bin/bash -lc "python - <<'PY'
+import csv, math
+from pathlib import Path
+rows=list(csv.DictReader(open('anomaly_scores.csv')))
+expected={p.name for p in Path('data/test_images').iterdir() if p.is_file() and not p.name.startswith('.')}
+names=[r['image'] for r in rows]
+scores=[float(r['anomaly_score']) for r in rows]
+print('rows',len(rows),'unique',len(set(names)),'missing',sorted(expected-set(names)),'extra',sorted(set(names)-expected))
+print('finite',all(math.isfinite(x) for x in scores),'min',min(scores),'max',max(scores),'mean',sum(scores)/len(scores))
+print('top10')
+for r in sorted(rows,key=lambda r:float(r['anomaly_score']),reverse=True)[:10]: print(r)
+print('bottom5')
+for r in sorted(rows,key=lambda r:float(r['anomaly_score']))[:5]: print(r)
+PY" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+rows 83 unique 83 missing [] extra []
+finite True min 0.1981157809495926 max 0.6722490787506104 mean 0.4546564438615937
+top10
+{'image': 'test_0049.png', 'anomaly_score': '0.6722490787506104'}
+{'image': 'test_0059.png', 'anomaly_score': '0.6560688018798828'}
+{'image': 'test_0055.png', 'anomaly_score': '0.6534479856491089'}
+{'image': 'test_0047.png', 'anomaly_score': '0.6409153938293457'}
+{'image': 'test_0057.png', 'anomaly_score': '0.6037311553955078'}
+{'image': 'test_0003.png', 'anomaly_score': '0.6004600524902344'}
+{'image': 'test_0006.png', 'anomaly_score': '0.5989784002304077'}
+{'image': 'test_0038.png', 'anomaly_score': '0.5937536358833313'}
+{'image': 'test_0002.png', 'anomaly_score': '0.5853167772293091'}
+{'image': 'test_0052.png', 'anomaly_score': '0.5750454664230347'}
+bottom5
+{'image': 'test_0068.png', 'anomaly_score': '0.1981157809495926'}
+{'image': 'test_0066.png', 'anomaly_score': '0.20652058720588684'}
+{'image': 'test_0076.png', 'anomaly_score': '0.20892703533172607'}
+{'image': 'test_0077.png', 'anomaly_score': '0.2141440212726593'}
+{'image': 'test_0067.png', 'anomaly_score': '0.21738925576210022'}
+
+exec
+/bin/bash -lc "git status --short 2>/dev/null || true && wc -l anomaly_scores.csv && sed -n '1,6p' anomaly_scores.csv" in /root/vad_pilot/results/bottle/step1/run2
+ succeeded in 0ms:
+84 anomaly_scores.csv
+image,anomaly_score
+test_0000.png,0.5730426907539368
+test_0001.png,0.5580486059188843
+test_0002.png,0.5853167772293091
+test_0003.png,0.6004600524902344
+test_0004.png,0.5744469165802002
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+codex
+Scored all 83 test images in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run2/anomaly_scores.csv). Reproducible code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run2/score_anomalies.py).
+
+Method: PatchCore-style nearest-neighbor patch memory bank  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+diff --git a/score_anomalies.py b/score_anomalies.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..58925c022ea677d7e5c5eff625d826755f6fe7bb
+--- /dev/null
++++ b/score_anomalies.py
+@@ -0,0 +1,197 @@
++#!/usr/bin/env python3
++"""Unsupervised image anomaly scoring using a PatchCore-style memory bank."""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import random
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++from PIL import Image
++from torch import Tensor, nn
++from torch.utils.data import DataLoader, Dataset
++from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
++
++
++IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp"}
++
++
++class ImageDataset(Dataset):
++    def __init__(self, paths: list[Path], transform) -> None:
++        self.paths = paths
++        self.transform = transform
++
++    def __len__(self) -> int:
++        return len(self.paths)
++
++    def __getitem__(self, index: int) -> tuple[Tensor, str]:
++        path = self.paths[index]
++        with Image.open(path) as image:
++            tensor = self.transform(image.convert("RGB"))
++        return tensor, path.name
++
++
++class PatchFeatureExtractor(nn.Module):
++    def __init__(self) -> None:
++        super().__init__()
++        model = wide_resnet50_2(weights=Wide_ResNet50_2_Weights.IMAGENET1K_V2)
++        self.stem = nn.Sequential(model.conv1, model.bn1, model.relu, model.maxpool)
++        self.layer1 = model.layer1
++        self.layer2 = model.layer2
++        self.layer3 = model.layer3
++
++    def forward(self, images: Tensor) -> Tensor:
++        features = self.layer1(self.stem(images))
++        layer2 = self.layer2(features)
++        layer3 = self.layer3(layer2)
++
++        # Local averaging makes descriptors less sensitive to one-pixel noise.
++        layer2 = F.avg_pool2d(layer2, kernel_size=3, stride=1, padding=1)
++        layer3 = F.avg_pool2d(layer3, kernel_size=3, stride=1, padding=1)
++        layer3 = F.interpolate(
++            layer3, size=layer2.shape[-2:], mode="bilinear", align_corners=False
++        )
++
++        # Equalize the contribution of each backbone stage before concatenation.
++        layer2 = F.normalize(layer2, dim=1)
++        layer3 = F.normalize(layer3, dim=1)
++        patches = torch.cat((layer2, layer3), dim=1)
++        return patches.permute(0, 2, 3, 1).flatten(1, 2)
++
++
++def image_paths(directory: Path) -> list[Path]:
++    return sorted(
++        path
++        for path in directory.iterdir()
++        if path.is_file()
++        and not path.name.startswith(".")
++        and path.suffix.lower() in IMAGE_EXTENSIONS
++    )
++
++
++def make_projection(input_dim: int, output_dim: int, device: torch.device) -> Tensor:
++    generator = torch.Generator(device=device).manual_seed(17)
++    projection = torch.randn(
++        input_dim, output_dim, generator=generator, device=device
++    )
++    return projection / output_dim**0.5
++
++
++@torch.inference_mode()
++def build_memory_bank(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    patches_per_image: int,
++    device: torch.device,
++) -> Tensor:
++    banks: list[Tensor] = []
++    generator = torch.Generator(device=device).manual_seed(29)
++    for images, _ in loader:
++        descriptors = extractor(images.to(device, non_blocking=True)) @ projection
++        descriptors = F.normalize(descriptors, dim=-1)
++        count = min(patches_per_image, descriptors.shape[1])
++        for image_descriptors in descriptors:
++            indices = torch.randperm(
++                image_descriptors.shape[0], generator=generator, device=device
++            )[:count]
++            banks.append(image_descriptors[indices].cpu())
++    return torch.cat(banks).contiguous()
++
++
++def nearest_distances(
++    queries: Tensor, memory_bank: Tensor, bank_chunk_size: int = 4096
++) -> Tensor:
++    nearest_similarity = torch.full(
++        (queries.shape[0],), -1.0, device=queries.device
++    )
++    for start in range(0, memory_bank.shape[0], bank_chunk_size):
++        bank_chunk = memory_bank[start : start + bank_chunk_size]
++        similarities = queries @ bank_chunk.T
++        nearest_similarity = torch.maximum(
++            nearest_similarity, similarities.max(dim=1).values
++        )
++    return (2.0 - 2.0 * nearest_similarity).clamp_min_(0).sqrt_()
++
++
++@torch.inference_mode()
++def score_images(
++    loader: DataLoader,
++    extractor: nn.Module,
++    projection: Tensor,
++    memory_bank_cpu: Tensor,
++    device: torch.device,
++) -> list[tuple[str, float]]:
++    memory_bank = memory_bank_cpu.to(device)
++    results: list[tuple[str, float]] = []
++    for images, names in loader:
++        batch = extractor(images.to(device, non_blocking=True)) @ projection
++        batch = F.normalize(batch, dim=-1)
++        for descriptors, name in zip(batch, names):
++            distances = nearest_distances(descriptors, memory_bank)
++            top_1_percent = distances.topk(max(1, distances.numel() // 100)).values
++            top_5_percent = distances.topk(max(1, distances.numel() // 20)).values
++            score = 0.7 * top_1_percent.mean() + 0.3 * top_5_percent.mean()
++            results.append((name, float(score.cpu())))
++    return results
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--train-dir", type=Path, default=Path("data/train"))
++    parser.add_argument("--test-dir", type=Path, default=Path("data/test_images"))
++    parser.add_argument("--output", type=Path, default=Path("anomaly_scores.csv"))
++    parser.add_argument("--batch-size", type=int, default=8)
++    parser.add_argument("--patches-per-image", type=int, default=80)
++    parser.add_argument("--projection-dim", type=int, default=384)
++    args = parser.parse_args()
++
++    random.seed(0)
++    torch.manual_seed(0)
++    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    train_paths = image_paths(args.train_dir)
++    test_paths = image_paths(args.test_dir)
++    if not train_paths or not test_paths:
++        raise RuntimeError("Both train and test directories must contain images")
++
++    weights = Wide_ResNet50_2_Weights.IMAGENET1K_V2
++    train_loader = DataLoader(
++        ImageDataset(train_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++    test_loader = DataLoader(
++        ImageDataset(test_paths, weights.transforms()),
++        batch_size=args.batch_size,
++        shuffle=False,
++        num_workers=4,
++        pin_memory=device.type == "cuda",
++    )
++
++    extractor = PatchFeatureExtractor().eval().to(device)
++    projection = make_projection(1536, args.projection_dim, device)
++    memory_bank = build_memory_bank(
++        train_loader, extractor, projection, args.patches_per_image, device
++    )
++    scores = score_images(
++        test_loader, extractor, projection, memory_bank, device
++    )
++
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    with args.output.open("w", newline="") as output_file:
++        writer = csv.writer(output_file)
++        writer.writerow(("image", "anomaly_score"))
++        writer.writerows(scores)
++
++    print(f"Scored {len(scores)} images -> {args.output}")
++    print("Method: PatchCore-style nearest-neighbor patch memory bank")
++    print("Backbone: ImageNet-pretrained Wide ResNet-50-2")
++
++
++if __name__ == "__main__":
++    main()
+
+tokens used
+17,354
+Scored all 83 test images in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run2/anomaly_scores.csv). Reproducible code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run2/score_anomalies.py).
+
+Method: PatchCore-style nearest-neighbor patch memory bank  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+[PROGRESS] Run 3/8 | category=bottle step=2 rep=1 | elapsed=298s | done=2 skipped=0
+[SKIP] bottle step2 run1 (already PASS)
+[PROGRESS] Run 4/8 | category=bottle step=2 rep=2 | elapsed=298s | done=2 skipped=1
+[SKIP] bottle step2 run2 (already PASS)
+[PROGRESS] Run 5/8 | category=bottle step=3 rep=1 | elapsed=298s | done=2 skipped=2
+[SKIP] bottle step3 run1 (already PASS)
+[PROGRESS] Run 6/8 | category=bottle step=3 rep=2 | elapsed=298s | done=2 skipped=3
+[SKIP] bottle step3 run2 (already PASS)
+[PROGRESS] Run 7/8 | category=bottle step=4 rep=1 | elapsed=298s | done=2 skipped=4
+[SKIP] bottle step4 run1 (already PASS)
+[PROGRESS] Run 8/8 | category=bottle step=4 rep=2 | elapsed=298s | done=2 skipped=5
+[SKIP] bottle step4 run2 (already PASS)
+
+Experiment summary
+Total runs: 2
+Passes: 2
+Fails: 0
+Total elapsed time: 298 seconds

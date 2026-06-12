@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\n- Method: PatchCore-style nearest-neighbor anomaly detection\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Verified: 117/117 image scores and 117 grayscale 256\u00d7256 pixel maps\n- Training used only `./data/train/`; scoring used only `./data/test_images/`",
+  "status": "PASS",
+  "rerun": "completed"
+}

@@ -1,0 +1,9 @@
+Created:
+
+- `anomaly_scores.csv`: scores for all 117 test images
+- `score_anomalies.py`: reproducible scoring pipeline
+
+Validation passed: filenames match, scores are finite and normalized to `[0,1]`.
+
+**Method:** PatchCore-style nearest-neighbor patch anomaly detection  
+**Backbone:** ImageNet-pretrained Wide ResNet-50-2, layers 2 and 3

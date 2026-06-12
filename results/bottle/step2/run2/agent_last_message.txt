@@ -1,0 +1,4 @@
+Created all required files in `./outputs/` and validated all 83 test images.
+
+Method: PatchCore-style nearest-neighbor feature memory bank  
+Backbone: ImageNet-pretrained ResNet-18 using `layer2` and `layer3` features

@@ -1,0 +1,10 @@
+Completed in `./outputs/`.
+
+Validated:
+- 117/117 image scores, finite floats
+- 117/117 pixel maps
+- All maps single-channel PNG, 256×256
+- Scores normalized to `[0, 1]`
+
+Method: PatchCore-style nearest-neighbor feature memory  
+Backbone: ImageNet-pretrained ResNet-18 using `layer2` and `layer3` features

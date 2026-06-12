@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run7/anomaly_scores.csv) with scores for all 83 test images.\n- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run7/score_anomalies.py) reproducible pipeline.\n- [anomaly_scores.json](/root/vad_pilot/results/bottle/step1/run7/anomaly_scores.json) metadata.\n\nMethod: Location-aware diagonal Gaussian patch-feature modeling  \nBackbone: ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

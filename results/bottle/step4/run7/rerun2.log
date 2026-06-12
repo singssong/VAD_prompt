@@ -1,0 +1,3 @@
+Scored 83 images
+Method: spatial diagonal Gaussian patch distribution
+Backbone: ImageNet-pretrained ResNet-18 (layer1 + layer2)

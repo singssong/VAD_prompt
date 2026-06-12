@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nMethod: PatchCore-style nearest-neighbor patch memory bank with Gaussian-smoothed anomaly maps and normalized top-1% image aggregation.\n\nBackbone: ImageNet-pretrained Wide ResNet-50-2 using concatenated `layer2` and `layer3` features.\n\nValidated all 117 test images, with single-channel 256\u00d7256 PNG maps and finite scores in `[0, 1]`.",
+  "status": "PASS",
+  "rerun": "completed"
+}

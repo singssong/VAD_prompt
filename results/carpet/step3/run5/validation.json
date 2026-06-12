@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: PatchCore-style nearest-neighbor feature memory bank\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Scored: 117/117 test images\n- Pixel maps: 117 single-channel 16-bit PNGs, 256x256\n- Validation: Passed with finite float scores and exact filename coverage",
+  "status": "PASS",
+  "rerun": "completed"
+}

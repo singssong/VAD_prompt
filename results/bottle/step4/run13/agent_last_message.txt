@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature memory  
+Backbone: ImageNet-pretrained ResNet-18  
+Features: Concatenated `layer2` and `layer3`
+
+All 83 test images have unique normalized scores and 256x256 single-channel PNG anomaly maps.

@@ -1,0 +1,9 @@
+Scored all 117 test images successfully.
+
+Outputs:
+- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run7/anomaly_scores.csv)
+- [anomaly_scores.json](/root/vad_pilot/results/carpet/step1/run7/anomaly_scores.json)
+- [anomaly_detection.py](/root/vad_pilot/results/carpet/step1/run7/anomaly_detection.py)
+
+Method: PatchCore-style nearest-neighbor patch anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

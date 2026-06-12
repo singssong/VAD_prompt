@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor patch feature memory
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored all 117 test images
+- Generated 117 single-channel 256x256 PNG anomaly maps
+- Added training, inference, requirements, and README files

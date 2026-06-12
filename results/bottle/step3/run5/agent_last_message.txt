@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: spatial diagonal Gaussian patch-feature anomaly detection with top-1% pixel aggregation.  
+Backbone: ImageNet-pretrained ResNet-18 using fused `layer2` and `layer3` features.
+
+All 83 test images have finite scores and 256×256 single-channel PNG maps.

@@ -1,0 +1,9 @@
+Completed all required outputs in `./outputs/`.
+
+Method: nearest-neighbor normal patch memory bank with multi-scale CNN features.  
+Backbone: ImageNet-pretrained ResNet-18.
+
+Validated:
+- 117/117 image scores
+- 117/117 single-channel 256×256 PNG maps
+- Scripts compile and execute successfully

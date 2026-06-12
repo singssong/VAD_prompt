@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: PatchCore-style nearest-neighbor feature memory\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Features: concatenated `layer2` and `layer3`\n- Results: 83 image scores and 83 single-channel 256\u00d7256 PNG maps\n- Scores: normalized to `[0,1]`, all unique and finite",
+  "status": "PASS",
+  "rerun": "completed"
+}

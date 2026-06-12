@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nValidated:\n- 83/83 test images scored\n- 83 single-channel 256x256 PNG maps\n- Scores normalized to `[0, 1)`\n\nMethod: spatial diagonal-Gaussian feature modeling with smoothed Mahalanobis-style anomaly maps.\n\nBackbone: ImageNet-pretrained ResNet-18 using concatenated `layer1`, `layer2`, and `layer3` features.",
+  "status": "PASS",
+  "rerun": "completed"
+}

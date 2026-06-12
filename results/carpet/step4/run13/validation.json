@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: PatchCore-style projected patch nearest-neighbor detection\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Features: `layer2` and `layer3`\n- Coverage: 117/117 test images\n- Pixel maps: single-channel 256\u00d7256 PNGs\n- Image scores: normalized, unique floats in `[0, 1]`",
+  "status": "PASS",
+  "rerun": "completed"
+}

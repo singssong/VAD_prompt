@@ -1,0 +1,7 @@
+Completed all required outputs in `./outputs/`.
+
+Method: spatial diagonal-Gaussian modeling of concatenated mid-level CNN features, with Gaussian-smoothed anomaly maps and top-1% pixel aggregation.
+
+Backbone: ImageNet-pretrained ResNet-18 using `layer1` and `layer2`.
+
+Validated 83 scores and 83 single-channel 256×256 PNG maps.

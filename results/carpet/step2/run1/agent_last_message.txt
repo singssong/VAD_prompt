@@ -1,0 +1,6 @@
+Completed all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor anomaly detection
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Verified: 117/117 image scores and 117 grayscale 256×256 pixel maps
+- Training used only `./data/train/`; scoring used only `./data/test_images/`

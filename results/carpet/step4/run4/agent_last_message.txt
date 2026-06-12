@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 117/117 image scores
+- 117 grayscale `256x256` pixel maps
+- Scores are finite, normalized, and uniquely ranked
+
+Method: diagonal Gaussian modeling of concatenated mid-level spatial features with Gaussian-smoothed anomaly maps.
+
+Backbone: ImageNet-pretrained ResNet-50 using `layer2` and `layer3`.

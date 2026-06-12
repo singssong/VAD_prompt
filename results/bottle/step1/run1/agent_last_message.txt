@@ -1,0 +1,7 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run1/anomaly_scores.csv): scores for all 83 test images
+- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run1/score_anomalies.py): reproducible pipeline
+
+Method: robust spatial PaDiM-style multi-scale feature modeling  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

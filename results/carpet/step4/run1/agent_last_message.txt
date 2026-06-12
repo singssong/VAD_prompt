@@ -1,0 +1,8 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature anomaly detection
+- Backbone: ImageNet-pretrained ResNet-18
+- Features: concatenated `layer2` and `layer3`
+- Coverage: 117/117 test images
+- Pixel maps: grayscale PNG, 256×256
+- Image scores: normalized `[0,1]`, higher is more anomalous

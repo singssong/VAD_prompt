@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Created all required files in `./outputs/`.\n\nMethod: PaDiM-style positional diagonal Gaussian feature modeling  \nBackbone: ImageNet-pretrained Wide ResNet-50-2\n\nValidated:\n- 83/83 test images scored\n- 83 single-channel 256x256 PNG maps\n- All scores finite floats\n- Training and inference scripts run successfully",
+  "status": "PASS",
+  "rerun": "completed"
+}

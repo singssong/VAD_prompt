@@ -1,0 +1,8 @@
+Scored all 83 test images.
+
+- Output: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run13/anomaly_scores.csv)
+- Script: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run13/score_anomalies.py)
+- Method: Multi-scale spatial diagonal Gaussian feature modeling
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Validation confirmed complete coverage, finite scores, and unique ranks.

@@ -1,0 +1,4 @@
+Scored all 83 test images in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run9/anomaly_scores.csv). Implementation: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run9/score_anomalies.py).
+
+Method: spatially aligned PatchCore-style nearest-neighbor detection with robust train-only calibration  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

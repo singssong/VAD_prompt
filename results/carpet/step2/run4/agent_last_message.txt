@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor anomaly detection with position-wise calibration
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored: 117/117 test images
+- Pixel maps: 117 single-channel 256×256 PNGs

@@ -1,0 +1,7 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run1/anomaly_scores.csv) with 117 validated scores.
+- [score_anomalies.py](/root/vad_pilot/results/carpet/step1/run1/score_anomalies.py) for reproducibility.
+
+**Method:** PatchCore-style patch nearest-neighbor anomaly detection  
+**Backbone:** ImageNet-pretrained Wide ResNet-50-2

@@ -1,0 +1,9 @@
+Created all required outputs in `./outputs/`.
+
+Validated:
+- 83 image scores
+- 83 single-channel 256×256 PNG maps
+- Training and inference scripts run successfully
+
+Method: PaDiM spatial Gaussian anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

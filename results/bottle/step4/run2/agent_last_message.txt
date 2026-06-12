@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature memory
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Features: concatenated `layer2` and `layer3`
+- Results: 83 image scores and 83 single-channel 256×256 PNG maps
+- Scores: normalized to `[0,1]`, all unique and finite

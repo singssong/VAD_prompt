@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Implemented and executed the anomaly detection pipeline.\n\n- **Method:** Spatial diagonal-Gaussian modeling of concatenated mid-level CNN features\n- **Backbone:** ImageNet-pretrained ResNet-18 (`layer2` + `layer3`)\n- Scored all 83 test images\n- Generated 83 single-channel 256\u00d7256 PNG maps\n- Image scores normalized to `[0, 1]`\n- All required files are in `./outputs/`\n- Validation passed for filenames, dimensions, modes, and finite scores",
+  "status": "PASS",
+  "rerun": "completed"
+}

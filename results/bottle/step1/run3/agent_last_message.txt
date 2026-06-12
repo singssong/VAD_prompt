@@ -1,0 +1,6 @@
+Scored all 83 test images.
+
+- Output: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run3/anomaly_scores.csv)
+- Code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run3/score_anomalies.py)
+- Method: PaDiM spatial Gaussian patch anomaly detection
+- Backbone: ImageNet-pretrained Wide ResNet-50-2

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: PatchCore-style nearest-neighbor feature memory bank  \nBackbone: ImageNet-pretrained Wide ResNet-50-2  \nFeatures: concatenated `layer2` and `layer3`\n\nValidated 117 JSON scores and 117 grayscale 256\u00d7256 PNG anomaly maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

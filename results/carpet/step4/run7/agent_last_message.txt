@@ -1,0 +1,10 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor patch memory bank  
+Backbone: ImageNet-pretrained ResNet-18 using concatenated `layer1` and `layer2` features
+
+Validated:
+- 117/117 JSON scores
+- 117/117 single-channel 256×256 PNG maps
+- Scores normalized to `[0,1]`
+- Training and inference scripts compile and run successfully

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed in `./outputs/`.\n\nMethod: PatchCore-style nearest-neighbor feature memory bank with Gaussian-smoothed pixel maps and normal-data score calibration.\n\nBackbone: ImageNet-pretrained ResNet-18, concatenating `layer1` and `layer2` features.\n\nValidated:\n- 83/83 test scores included\n- 83 grayscale 256x256 PNG maps\n- Scores normalized to `[0, 1)`",
+  "status": "PASS",
+  "rerun": "completed"
+}

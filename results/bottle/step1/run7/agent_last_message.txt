@@ -1,0 +1,8 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run7/anomaly_scores.csv) with scores for all 83 test images.
+- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run7/score_anomalies.py) reproducible pipeline.
+- [anomaly_scores.json](/root/vad_pilot/results/bottle/step1/run7/anomaly_scores.json) metadata.
+
+Method: Location-aware diagonal Gaussian patch-feature modeling  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

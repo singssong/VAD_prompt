@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 83 test images. Scores are in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run8/anomaly_scores.csv); implementation is [anomaly_detection.py](/root/vad_pilot/results/bottle/step1/run8/anomaly_detection.py).\n\nMethod: PatchCore-style nearest-neighbor patch memory bank  \nBackbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)",
+  "status": "PASS",
+  "rerun": "skipped"
+}

@@ -1,0 +1,8 @@
+Scored all 83 test images.
+
+- Output: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run2/anomaly_scores.csv)
+- Code: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run2/score_anomalies.py)
+- Method: PatchCore-style nearest-neighbor patch anomaly detection
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Higher scores indicate greater anomaly likelihood.

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nMethod: nearest-neighbor normal patch memory bank with multi-scale CNN features.  \nBackbone: ImageNet-pretrained ResNet-18.\n\nValidated:\n- 117/117 image scores\n- 117/117 single-channel 256\u00d7256 PNG maps\n- Scripts compile and execute successfully",
+  "status": "PASS",
+  "rerun": "completed"
+}

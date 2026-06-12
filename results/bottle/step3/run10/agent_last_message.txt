@@ -1,0 +1,10 @@
+Created all required files under `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor patch feature anomaly detection  
+Backbone: ImageNet-pretrained ResNet-50 (`layer2` + `layer3` features)
+
+Validated:
+- 83/83 test images scored
+- 83 single-channel 256×256 PNG maps
+- All scores finite floats
+- Scripts compile successfully

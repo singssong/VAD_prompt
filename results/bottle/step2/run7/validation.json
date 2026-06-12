@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: PatchCore-style nearest-neighbor patch memory bank\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Scored: 83/83 test images\n- Pixel maps: 83 grayscale PNGs, 256\u00d7256\n- Score range: `0.217760` to `0.768873`",
+  "status": "PASS",
+  "rerun": "completed"
+}

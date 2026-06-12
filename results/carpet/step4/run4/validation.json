@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nValidated:\n- 117/117 image scores\n- 117 grayscale `256x256` pixel maps\n- Scores are finite, normalized, and uniquely ranked\n\nMethod: diagonal Gaussian modeling of concatenated mid-level spatial features with Gaussian-smoothed anomaly maps.\n\nBackbone: ImageNet-pretrained ResNet-50 using `layer2` and `layer3`.",
+  "status": "PASS",
+  "rerun": "completed"
+}

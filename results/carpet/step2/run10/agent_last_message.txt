@@ -1,0 +1,7 @@
+Created and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor patch memory
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored: 117/117 test images
+- Pixel maps: 117 grayscale 256×256 PNGs
+- Validation passed for coverage, dimensions, and finite scores.

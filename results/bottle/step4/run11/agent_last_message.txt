@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)
+
+Validation passed: 83 image scores and 83 single-channel 256×256 pixel maps.

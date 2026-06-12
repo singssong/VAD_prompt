@@ -1,0 +1,8 @@
+{
+  "method": "location-aware diagonal Gaussian patch feature modeling",
+  "backbone": "ImageNet-pretrained Wide ResNet-50-2",
+  "train_images": 209,
+  "test_images": 83,
+  "score_file": "anomaly_scores.csv",
+  "higher_score_is_more_anomalous": true
+}

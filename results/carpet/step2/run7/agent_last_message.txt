@@ -1,0 +1,10 @@
+Created all required files under `./outputs/`.
+
+Validated:
+- 117/117 test filenames scored
+- 117 grayscale 256x256 PNG pixel maps
+- Finite float anomaly scores
+- Scripts compile successfully
+
+Method: PatchCore-style nearest-neighbor patch anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

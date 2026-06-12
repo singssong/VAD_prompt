@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- **Method:** Spatial diagonal Mahalanobis feature distribution
+- **Backbone:** ImageNet-pretrained ResNet-18
+- Scored all 83 test images
+- Generated 83 single-channel 256×256 PNG anomaly maps
+- Verified filename coverage, dimensions, formats, and finite float scores

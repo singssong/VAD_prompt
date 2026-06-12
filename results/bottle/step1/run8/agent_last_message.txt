@@ -1,0 +1,4 @@
+Scored all 83 test images. Scores are in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run8/anomaly_scores.csv); implementation is [anomaly_detection.py](/root/vad_pilot/results/bottle/step1/run8/anomaly_detection.py).
+
+Method: PatchCore-style nearest-neighbor patch memory bank  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)

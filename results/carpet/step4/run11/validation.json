@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: PaDiM-style per-location Gaussian feature modeling with Mahalanobis scoring.  \nBackbone: ImageNet-pretrained Wide ResNet-50-2 using `layer2` and `layer3`.\n\nGenerated scores and 256\u00d7256 single-channel PNG maps for all 117 test images.",
+  "status": "PASS",
+  "rerun": "completed"
+}

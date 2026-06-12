@@ -1,0 +1,11 @@
+{
+  "method": "spatial diagonal Gaussian patch anomaly scoring",
+  "backbone": "ImageNet Wide ResNet-50-2",
+  "feature_layers": [
+    "layer1",
+    "layer2"
+  ],
+  "training_images": 209,
+  "test_images": 83,
+  "output": "anomaly_scores.csv"
+}

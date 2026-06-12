@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Created and validated all required outputs in `./outputs/`.\n\nMethod: spatial diagonal-Gaussian patch anomaly detection using Mahalanobis distance.\n\nBackbone: ImageNet-pretrained ResNet-18, combining `layer1` and `layer2` features.\n\nScored all 83 test images and generated 83 grayscale 256\u00d7256 pixel maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

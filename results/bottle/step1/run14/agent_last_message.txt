@@ -1,0 +1,9 @@
+Scored all 83 test images.
+
+Outputs:
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run14/anomaly_scores.csv)
+- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run14/score_anomalies.py)
+- [anomaly_scores.json](/root/vad_pilot/results/bottle/step1/run14/anomaly_scores.json)
+
+Method: PatchCore-style nearest-neighbor patch memory bank  
+Backbone: Wide ResNet-50-2, ImageNet-1K V2 pretrained, using `layer2` and `layer3` features.

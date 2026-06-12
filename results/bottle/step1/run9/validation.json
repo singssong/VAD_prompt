@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 83 test images in [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run9/anomaly_scores.csv). Implementation: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run9/score_anomalies.py).\n\nMethod: spatially aligned PatchCore-style nearest-neighbor detection with robust train-only calibration  \nBackbone: ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

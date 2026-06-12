@@ -1,0 +1,7 @@
+Created:
+
+- `anomaly_scores.csv`: scores for all 83 test images
+- `score_anomalies.py`: reproducible scoring pipeline
+
+Method: PatchCore-style nearest-neighbor scoring plus global feature distance  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

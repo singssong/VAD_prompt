@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: Position-aware diagonal Gaussian feature modeling with Mahalanobis anomaly scoring  
+Backbone: ImageNet-pretrained ResNet-18 using `layer1`, `layer2`, and `layer3`
+
+Scored all 83 test images. Pixel maps are single-channel 256×256 PNGs.

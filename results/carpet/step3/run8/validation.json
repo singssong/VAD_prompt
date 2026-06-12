@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nMethod: PatchCore-style nearest-prototype patch anomaly detection using spherical k-means.\n\nBackbone: ImageNet-pretrained ResNet-18, combining `layer1` and `layer2` features.\n\nValidated:\n- 117/117 test files scored\n- 117 grayscale 256x256 pixel maps\n- All image scores are finite floats",
+  "status": "PASS",
+  "rerun": "completed"
+}

@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 117/117 image scores
+- 117/117 grayscale 256x256 pixel maps
+- All scores finite floats
+- Training and inference scripts run successfully
+
+Method: PatchCore-style nearest-neighbor patch anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` and `layer3`)

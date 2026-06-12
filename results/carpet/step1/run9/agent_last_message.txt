@@ -1,0 +1,9 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run9/anomaly_scores.csv): scores for all 117 test images.
+- [score_anomalies.py](/root/vad_pilot/results/carpet/step1/run9/score_anomalies.py): reproducible pipeline.
+
+**Method:** PatchCore-style multi-scale patch nearest-neighbor scoring  
+**Backbone:** ImageNet-pretrained Wide ResNet-50-2
+
+Validated all scores are finite, unique, and mapped exactly once to every test image.

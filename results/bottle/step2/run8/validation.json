@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nValidated:\n- 83/83 test images scored\n- 83 single-channel 256x256 PNG maps\n- Finite float anomaly scores\n- Scripts compile and run successfully\n\nMethod: spatially aware PatchCore  \nBackbone: ImageNet-pretrained ResNet-18",
+  "status": "PASS",
+  "rerun": "completed"
+}

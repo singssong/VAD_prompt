@@ -1,0 +1,10 @@
+{
+  "method": "PatchCore-style patch nearest-neighbor anomaly detection",
+  "backbone": "ImageNet-pretrained Wide ResNet-50-2",
+  "train_images": 209,
+  "test_images": 83,
+  "memory_patches": 40000,
+  "projection_dim": 512,
+  "score_aggregation": "mean of top 1% patch distances",
+  "output": "anomaly_scores.csv"
+}

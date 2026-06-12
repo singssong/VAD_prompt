@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\n- Method: Spatial diagonal Gaussian (PaDiM-style Mahalanobis scoring)\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Scored: 83/83 test images\n- Maps: 83 single-channel 256\u00d7256 PNGs\n- Image score range: 1.7245\u201390.3534",
+  "status": "PASS",
+  "rerun": "completed"
+}

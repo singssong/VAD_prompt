@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required files in `./outputs/`.\n\n- Method: PatchCore-style nearest-neighbor feature anomaly detection\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n- Features: `layer2` and `layer3`\n- Scored images: 83/83\n- Pixel maps: 83 single-channel 256x256 PNGs\n- Image score range: `0.0225\u20130.8161`",
+  "status": "PASS",
+  "rerun": "completed"
+}

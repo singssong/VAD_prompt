@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: spatial nearest-normal patch feature matching with Gaussian smoothing and normal-only score calibration.\n\nBackbone: ImageNet-pretrained Wide ResNet-50-2, using `layer2` and `layer3`.\n\nAll 83 test images have finite scores and single-channel 256\u00d7256 PNG maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

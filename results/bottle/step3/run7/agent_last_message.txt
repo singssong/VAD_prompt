@@ -1,0 +1,7 @@
+Completed all required outputs in `./outputs/`.
+
+- Method: PaDiM-style spatial diagonal Gaussian feature modeling
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored all 83 test images
+- Generated 83 single-channel 256×256 PNG maps
+- Verified all JSON scores are finite floats and filenames match exactly

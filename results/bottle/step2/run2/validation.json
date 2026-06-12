@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Created all required files in `./outputs/` and validated all 83 test images.\n\nMethod: PatchCore-style nearest-neighbor feature memory bank  \nBackbone: ImageNet-pretrained ResNet-18 using `layer2` and `layer3` features",
+  "status": "PASS",
+  "rerun": "completed"
+}

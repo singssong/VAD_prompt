@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature memory bank  
+Backbone: ImageNet-pretrained ResNet-18 using `layer2` and `layer3`
+
+Validated:
+- 117/117 test images scored
+- 117 grayscale 256×256 pixel maps
+- Image scores normalized to `[0, 1]`
+- Scripts compile and run successfully

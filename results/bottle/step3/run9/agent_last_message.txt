@@ -1,0 +1,7 @@
+Completed all required outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature memory
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored: 83/83 test images
+- Pixel maps: 83 grayscale 256×256 PNGs
+- Validation: filenames, dimensions, score types, and completeness passed.

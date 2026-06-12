@@ -1,0 +1,26 @@
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+TRAIN_DIR = ROOT / "data" / "train"
+TEST_DIR = ROOT / "data" / "test_images"
+OUTPUT_DIR = ROOT / "outputs"
+PIXEL_SCORE_DIR = OUTPUT_DIR / "pixel_scores"
+MODEL_PATH = OUTPUT_DIR / "model.pt"
+IMAGE_SCORES_PATH = OUTPUT_DIR / "image_scores.json"
+
+IMAGE_SIZE = 256
+BACKBONE = "resnet18"
+FEATURE_LAYERS = ("layer2", "layer3")
+PATCH_GRID_SIZE = 16
+PROJECTION_DIM = 128
+MEMORY_BANK_SIZE = 12000
+TRAIN_BATCH_SIZE = 16
+INFER_BATCH_SIZE = 8
+NN_QUERY_CHUNK = 2048
+GAUSSIAN_SIGMA = 1.5
+IMAGE_TOP_FRACTION = 0.01
+NORMALIZATION_LOW_PERCENTILE = 1.0
+NORMALIZATION_HIGH_PERCENTILE = 99.0
+SEED = 42
+

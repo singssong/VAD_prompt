@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 83/83 test images scored
+- 83 single-channel 256x256 PNG maps
+- Scores normalized to `[0, 1)`
+
+Method: spatial diagonal-Gaussian feature modeling with smoothed Mahalanobis-style anomaly maps.
+
+Backbone: ImageNet-pretrained ResNet-18 using concatenated `layer1`, `layer2`, and `layer3` features.

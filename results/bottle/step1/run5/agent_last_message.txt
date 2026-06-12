@@ -1,0 +1,9 @@
+Created:
+
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run5/anomaly_scores.csv): scores for all 83 test images
+- [anomaly_detection.py](/root/vad_pilot/results/bottle/step1/run5/anomaly_detection.py): reproducible pipeline
+
+Method: PaDiM-style spatial Gaussian modeling with top-region Mahalanobis scoring  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Verified complete coverage, finite scores, and deterministic output.

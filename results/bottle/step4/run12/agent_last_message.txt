@@ -1,0 +1,9 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature memory  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 using `layer2` and `layer3`
+
+Verified:
+- 83/83 image scores
+- 83/83 single-channel 256×256 PNG maps
+- Scores normalized to `[0, 1]`

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and verified all required artifacts in `./outputs/`.\n\n- Method: **PaDiM**\n- Backbone: **ImageNet-pretrained Wide ResNet-50-2**\n- Scored: **83/83 test images**\n- Pixel maps: **83 grayscale 256\u00d7256 PNGs**\n- All scores are finite floats; filename coverage is exact.",
+  "status": "PASS",
+  "rerun": "completed"
+}

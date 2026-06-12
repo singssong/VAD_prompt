@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 83 test images.\n\nOutputs:\n- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run11/anomaly_scores.csv)\n- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run11/score_anomalies.py)\n\nMethod: Spatial diagonal-Gaussian patch anomaly scoring  \nBackbone: ImageNet-pretrained Wide ResNet-50-2, using `layer1` and `layer2` features",
+  "status": "PASS",
+  "rerun": "skipped"
+}

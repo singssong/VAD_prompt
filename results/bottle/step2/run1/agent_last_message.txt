@@ -1,0 +1,8 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- 83/83 test images scored
+- Pixel maps are single-channel 256×256 PNGs
+- Scripts compile and run successfully
+
+Method: PatchCore-style nearest-neighbor patch memory  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

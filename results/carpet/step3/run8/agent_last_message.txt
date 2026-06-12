@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-prototype patch anomaly detection using spherical k-means.
+
+Backbone: ImageNet-pretrained ResNet-18, combining `layer1` and `layer2` features.
+
+Validated:
+- 117/117 test files scored
+- 117 grayscale 256x256 pixel maps
+- All image scores are finite floats

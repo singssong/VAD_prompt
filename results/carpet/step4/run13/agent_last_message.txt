@@ -1,0 +1,8 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: PatchCore-style projected patch nearest-neighbor detection
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Features: `layer2` and `layer3`
+- Coverage: 117/117 test images
+- Pixel maps: single-channel 256×256 PNGs
+- Image scores: normalized, unique floats in `[0, 1]`

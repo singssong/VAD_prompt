@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 117 finite image scores in `image_scores.json`
+- 117 matching single-channel 256x256 PNG maps
+- Runnable training and inference scripts
+- Requirements and README
+
+Method: PatchCore-style nearest-neighbor patch feature memory bank  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)

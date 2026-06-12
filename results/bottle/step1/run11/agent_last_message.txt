@@ -1,0 +1,8 @@
+Scored all 83 test images.
+
+Outputs:
+- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run11/anomaly_scores.csv)
+- [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run11/score_anomalies.py)
+
+Method: Spatial diagonal-Gaussian patch anomaly scoring  
+Backbone: ImageNet-pretrained Wide ResNet-50-2, using `layer1` and `layer2` features

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nValidated:\n- 117 finite image scores in `image_scores.json`\n- 117 matching single-channel 256x256 PNG maps\n- Runnable training and inference scripts\n- Requirements and README\n\nMethod: PatchCore-style nearest-neighbor patch feature memory bank  \nBackbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)",
+  "status": "PASS",
+  "rerun": "completed"
+}

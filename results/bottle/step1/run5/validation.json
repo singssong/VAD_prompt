@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run5/anomaly_scores.csv): scores for all 83 test images\n- [anomaly_detection.py](/root/vad_pilot/results/bottle/step1/run5/anomaly_detection.py): reproducible pipeline\n\nMethod: PaDiM-style spatial Gaussian modeling with top-region Mahalanobis scoring  \nBackbone: ImageNet-pretrained Wide ResNet-50-2\n\nVerified complete coverage, finite scores, and deterministic output.",
+  "status": "PASS",
+  "rerun": "skipped"
+}

@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor anomaly detection using concatenated mid-level features.
+
+Backbone: ImageNet-pretrained ResNet-18, using `layer2` and `layer3`.
+
+All 117 test images have normalized scores and single-channel 256×256 PNG maps.

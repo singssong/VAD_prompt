@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run1/anomaly_scores.csv) with 117 validated scores.\n- [score_anomalies.py](/root/vad_pilot/results/carpet/step1/run1/score_anomalies.py) for reproducibility.\n\n**Method:** PatchCore-style patch nearest-neighbor anomaly detection  \n**Backbone:** ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

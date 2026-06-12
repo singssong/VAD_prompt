@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Created:\n\n- `anomaly_scores.csv`: scores for all 117 test images\n- `score_anomalies.py`: reproducible scoring pipeline\n\nValidation passed: filenames match, scores are finite and normalized to `[0,1]`.\n\n**Method:** PatchCore-style nearest-neighbor patch anomaly detection  \n**Backbone:** ImageNet-pretrained Wide ResNet-50-2, layers 2 and 3",
+  "status": "PASS",
+  "rerun": "skipped"
+}

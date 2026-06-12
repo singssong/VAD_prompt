@@ -1,0 +1,10 @@
+Created all required files in `./outputs/`.
+
+Method: PaDiM-style positional diagonal Gaussian feature modeling  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Validated:
+- 83/83 test images scored
+- 83 single-channel 256x256 PNG maps
+- All scores finite floats
+- Training and inference scripts run successfully

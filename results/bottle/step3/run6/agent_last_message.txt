@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+- Method: Spatial diagonal Gaussian (PaDiM-style Mahalanobis scoring)
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored: 83/83 test images
+- Maps: 83 single-channel 256×256 PNGs
+- Image score range: 1.7245–90.3534

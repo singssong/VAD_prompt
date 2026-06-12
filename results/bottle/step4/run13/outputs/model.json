@@ -1,0 +1,12 @@
+{
+  "fit_images": 178,
+  "calibration_images": 31,
+  "memory_patches": 45000,
+  "feature_channels": 384,
+  "calibration": {
+    "image_low": 0.08219337835907936,
+    "image_high": 0.14931676313281061,
+    "pixel_low": 0.03755970112979412,
+    "pixel_high": 0.1338368066400294
+  }
+}

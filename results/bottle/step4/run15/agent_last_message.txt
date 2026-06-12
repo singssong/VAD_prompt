@@ -1,0 +1,7 @@
+Implemented and generated all required files in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature memory bank
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Features: `layer2` and `layer3`
+- Validated: 83/83 JSON scores and 83 grayscale 256x256 pixel maps
+- Scores normalized to `[0,1]`

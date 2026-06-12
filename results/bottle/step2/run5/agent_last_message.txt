@@ -1,0 +1,7 @@
+Completed and verified all required artifacts in `./outputs/`.
+
+- Method: **PaDiM**
+- Backbone: **ImageNet-pretrained Wide ResNet-50-2**
+- Scored: **83/83 test images**
+- Pixel maps: **83 grayscale 256×256 PNGs**
+- All scores are finite floats; filename coverage is exact.

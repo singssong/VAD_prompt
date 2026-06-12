@@ -1,0 +1,7 @@
+Completed all required outputs in `./outputs/`.
+
+Method: spatial diagonal-Gaussian feature modeling with Gaussian-smoothed anomaly maps and top-1% aggregation.
+
+Backbone: ImageNet-pretrained ResNet-50, concatenating `layer2` and `layer3` features.
+
+Validated 83/83 test images with distinct normalized scores and 256×256 single-channel PNG maps.

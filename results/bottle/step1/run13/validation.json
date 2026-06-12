@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 83 test images.\n\n- Output: [anomaly_scores.csv](/root/vad_pilot/results/bottle/step1/run13/anomaly_scores.csv)\n- Script: [score_anomalies.py](/root/vad_pilot/results/bottle/step1/run13/score_anomalies.py)\n- Method: Multi-scale spatial diagonal Gaussian feature modeling\n- Backbone: ImageNet-pretrained Wide ResNet-50-2\n\nValidation confirmed complete coverage, finite scores, and unique ranks.",
+  "status": "PASS",
+  "rerun": "skipped"
+}

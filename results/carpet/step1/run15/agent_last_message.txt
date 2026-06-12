@@ -1,0 +1,4 @@
+Created [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run15/anomaly_scores.csv) with finite anomaly scores for all 117 test images. Implementation: [anomaly_detection.py](/root/vad_pilot/results/carpet/step1/run15/anomaly_detection.py).
+
+Method: PatchCore-style nearest-neighbor patch memory  
+Backbone: ImageNet-pretrained Wide ResNet-50-2 (`layer2` + `layer3`)

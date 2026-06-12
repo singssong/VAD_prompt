@@ -1,0 +1,7 @@
+Completed anomaly detection outputs in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature memory bank
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Scored all 117 test images
+- Generated 117 single-channel 256×256 PNG maps
+- Validated JSON coverage, finite scores, image dimensions, and script syntax

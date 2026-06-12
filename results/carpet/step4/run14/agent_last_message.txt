@@ -1,0 +1,7 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature memory bank  
+Backbone: ImageNet-pretrained Wide ResNet-50-2  
+Features: concatenated `layer2` and `layer3`
+
+Validated 117 JSON scores and 117 grayscale 256×256 PNG anomaly maps.

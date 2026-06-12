@@ -1,0 +1,10 @@
+Completed in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor feature memory bank with Gaussian-smoothed pixel maps and normal-data score calibration.
+
+Backbone: ImageNet-pretrained ResNet-18, concatenating `layer1` and `layer2` features.
+
+Validated:
+- 83/83 test scores included
+- 83 grayscale 256x256 PNG maps
+- Scores normalized to `[0, 1)`

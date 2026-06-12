@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in `./outputs/`.\n\nMethod: spatial diagonal-Gaussian modeling of concatenated mid-level CNN features, with Gaussian-smoothed anomaly maps and top-1% pixel aggregation.\n\nBackbone: ImageNet-pretrained ResNet-18 using `layer1` and `layer2`.\n\nValidated 83 scores and 83 single-channel 256\u00d7256 PNG maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

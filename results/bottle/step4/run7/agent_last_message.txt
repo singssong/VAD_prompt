@@ -1,0 +1,7 @@
+Created and validated all required outputs in `./outputs/`.
+
+Method: spatial diagonal-Gaussian patch anomaly detection using Mahalanobis distance.
+
+Backbone: ImageNet-pretrained ResNet-18, combining `layer1` and `layer2` features.
+
+Scored all 83 test images and generated 83 grayscale 256×256 pixel maps.

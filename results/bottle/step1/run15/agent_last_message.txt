@@ -1,0 +1,4 @@
+Created [scores.csv](/root/vad_pilot/results/bottle/step1/run15/scores.csv) with anomaly scores for all 83 test images. Implementation: [anomaly_detection.py](/root/vad_pilot/results/bottle/step1/run15/anomaly_detection.py).
+
+Method: PatchCore-style patch nearest-neighbor anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

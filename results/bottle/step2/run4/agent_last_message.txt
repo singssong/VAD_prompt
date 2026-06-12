@@ -1,0 +1,10 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 83/83 test images scored
+- Pixel maps are single-channel 256×256 PNGs
+- JSON contains float scores for every test filename
+- Scripts compile and run successfully
+
+Method: PaDiM-inspired spatial diagonal Gaussian anomaly detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2

@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: Position-aware diagonal Gaussian feature modeling with Mahalanobis anomaly scoring  \nBackbone: ImageNet-pretrained ResNet-18 using `layer1`, `layer2`, and `layer3`\n\nScored all 83 test images. Pixel maps are single-channel 256\u00d7256 PNGs.",
+  "status": "PASS",
+  "rerun": "completed"
+}

@@ -1,0 +1,14 @@
+Develop an anomaly detection solution.
+
+## Task
+Score every image in ./data/test_images/ for how anomalous it is, using 
+./data/train/ as reference data.
+
+## Constraints (apply to all)
+- Use ONLY ./data/train/ for training and ./data/test_images/ for scoring.
+- Do NOT read, open, search, or reference anything under ./ground_truth/.
+  Do not look for labels or masks anywhere.
+- Do NOT ask questions mid-task. Work autonomously: write code, install packages,
+  train, run inference, fix errors, re-run until outputs exist.
+
+When finished, print what method and backbone you chose.

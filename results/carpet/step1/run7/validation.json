@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 0,
+  "all_256": false,
+  "method_backbone": "Scored all 117 test images successfully.\n\nOutputs:\n- [anomaly_scores.csv](/root/vad_pilot/results/carpet/step1/run7/anomaly_scores.csv)\n- [anomaly_scores.json](/root/vad_pilot/results/carpet/step1/run7/anomaly_scores.json)\n- [anomaly_detection.py](/root/vad_pilot/results/carpet/step1/run7/anomaly_detection.py)\n\nMethod: PatchCore-style nearest-neighbor patch anomaly detection  \nBackbone: ImageNet-pretrained Wide ResNet-50-2",
+  "status": "PASS",
+  "rerun": "skipped"
+}

@@ -1,0 +1,6 @@
+Completed all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor patch feature detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Validated 117 image scores and 117 single-channel 256x256 PNG anomaly maps with exact filename coverage.

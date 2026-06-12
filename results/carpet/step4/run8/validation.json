@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 117,
+  "pixel_maps_count": 117,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: spatial diagonal-Gaussian feature anomaly detection with Mahalanobis scoring.  \nBackbone: ImageNet-pretrained ResNet-18 using concatenated `layer2` and `layer3` features.\n\nGenerated scores and 117 single-channel 256\u00d7256 PNG anomaly maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

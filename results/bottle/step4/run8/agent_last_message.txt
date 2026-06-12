@@ -1,0 +1,8 @@
+Completed and validated all required files in `./outputs/`.
+
+- Method: PatchCore-style nearest-neighbor feature anomaly detection
+- Backbone: ImageNet-pretrained Wide ResNet-50-2
+- Features: `layer2` and `layer3`
+- Scored images: 83/83
+- Pixel maps: 83 single-channel 256x256 PNGs
+- Image score range: `0.0225–0.8161`

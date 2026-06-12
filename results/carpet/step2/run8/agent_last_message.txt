@@ -1,0 +1,9 @@
+Completed all required outputs in `./outputs/`.
+
+Validated:
+- 117 JSON scores covering every test image
+- 117 single-channel 256×256 PNG pixel maps
+- Runnable training and inference scripts
+
+Method: PaDiM-style multiscale Gaussian feature modeling  
+Backbone: ImageNet-pretrained ResNet-18

@@ -1,0 +1,10 @@
+data/
+data_*/
+ground_truth/
+ground_truth_*/
+*.tar.xz
+**/__pycache__/
+**/run*/data
+**/run*/ground_truth
+spec_*.txt
+**/*.pt

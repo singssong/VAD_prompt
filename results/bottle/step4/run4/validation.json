@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed all required outputs in [`outputs/`](/root/vad_pilot/results/bottle/step4/run4/outputs).\n\nValidated:\n- 83/83 test images scored\n- 83 single-channel 256\u00d7256 PNG maps\n- Scores normalized to `[0,1)`\n- Training and inference scripts pass syntax checks\n\nMethod: position-aware diagonal Gaussian feature modeling (PaDiM-style).  \nBackbone: ImageNet-pretrained Wide ResNet-50-2 using concatenated `layer1` and `layer2` features.",
+  "status": "PASS",
+  "rerun": "completed"
+}

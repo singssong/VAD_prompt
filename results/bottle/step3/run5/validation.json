@@ -1,0 +1,9 @@
+{
+  "isolation_ok": true,
+  "image_scores_count": 83,
+  "pixel_maps_count": 83,
+  "all_256": true,
+  "method_backbone": "Completed and validated all required outputs in `./outputs/`.\n\nMethod: spatial diagonal Gaussian patch-feature anomaly detection with top-1% pixel aggregation.  \nBackbone: ImageNet-pretrained ResNet-18 using fused `layer2` and `layer3` features.\n\nAll 83 test images have finite scores and 256\u00d7256 single-channel PNG maps.",
+  "status": "PASS",
+  "rerun": "completed"
+}

@@ -1,0 +1,6 @@
+Completed and validated all required outputs in `./outputs/`.
+
+Method: PatchCore-style nearest-neighbor patch feature detection  
+Backbone: ImageNet-pretrained Wide ResNet-50-2
+
+Scored all 83 test images. Pixel maps are single-channel 16-bit PNGs at 256×256.
